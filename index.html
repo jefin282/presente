@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Um presente ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:black;
+    overflow:hidden;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial,Helvetica,sans-serif;
+    color:white;
+}
+
+#botao{
+    padding:18px 45px;
+    font-size:22px;
+    background:transparent;
+    border:2px solid white;
+    color:white;
+    border-radius:50px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+#botao:hover{
+    background:white;
+    color:black;
+}
+
+#mensagem{
+    position:absolute;
+    width:80%;
+    text-align:center;
+    font-size:30px;
+    line-height:1.6;
+    display:none;
+}
+
+.coracao{
+    position:absolute;
+    bottom:-50px;
+    animation:subir 4s linear forwards;
+    user-select:none;
+}
+
+@keyframes subir{
+    0%{
+        transform:translateY(0);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-110vh);
+        opacity:0;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<button id="botao">Clique aqui ❤️</button>
+
+<div id="mensagem"></div>
+
+<script>
+
+const texto = `Meu amor,
+
+Neste dia 04/08/2026, você completa 18 anos. Este é um dia muito importante para mim, pois é quando você celebra mais um ano de vida.
+
+Sou muito grato por fazer parte deste momento e por poder compartilhar mais um ano ao seu lado. Quero te parabenizar por todas as suas conquistas, pelo seu esforço e por tudo o que você vem construindo. Também quero deixar bem claro o quanto eu te amo.
+
+Mas acho que apenas palavras não são capazes de demonstrar tudo o que sinto por você. Ainda assim, vim aqui para te dizer uma coisa:
+
+EU TE AMO MUITO! ❤️
+
+E vou te amar para sempre.
+
+Feliz aniversário, meu amor! 🎉❤️`;
+
+const botao = document.getElementById("botao");
+const mensagem = document.getElementById("mensagem");
+const musica = new Audio("Martin_Garrix_-_There_For_You_ft._Troye_Sivan_(mp3.pm).mp3")
+
+musica.volume = 1;
+
+botao.addEventListener("click", () => {
+
+    musica.play();
+
+    botao.style.display = "none";
+
+    for(let i=0;i<80;i++){
+        criarCoracao();
+    }
+
+    setTimeout(()=>{
+        escreverTexto();
+    },3000);
+
+});
+
+function criarCoracao(){
+
+    const c = document.createElement("div");
+
+    c.innerHTML = "❤️";
+    c.className = "coracao";
+
+    c.style.left = Math.random()*window.innerWidth+"px";
+    c.style.fontSize = (20+Math.random()*30)+"px";
+    c.style.animationDuration = (3+Math.random()*2)+"s";
+
+    document.body.appendChild(c);
+
+    setTimeout(()=>{
+        c.remove();
+    },5000);
+
+}
+
+function escreverTexto(){
+
+    mensagem.style.display="block";
+
+    let i=0;
+
+    const intervalo=setInterval(()=>{
+
+        mensagem.innerHTML += texto.charAt(i);
+
+        i++;
+
+        if(i>=texto.length){
+            clearInterval(intervalo);
+        }
+
+    },45);
+
+}
+
+</script>
+
+</body>
+</html>
